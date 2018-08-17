@@ -1,8 +1,10 @@
 
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class QuizServiceClient {
+  url = 'https://cs4550-summer2-2018-bk610.herokuapp.com/api/quiz';
+
   submitQuiz =  quiz =>
     fetch('http://localhost:3000/api/quiz/' + quiz._id + '/submission', {
       method: 'post',
