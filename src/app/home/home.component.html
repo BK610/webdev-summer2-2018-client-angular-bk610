@@ -2,11 +2,20 @@
   <div class="col-12">
     <h2>Available Courses</h2>
     <ul class="list-group">
-      <li (click)="navigateToCourse(course)"
-          [ngClass]="{'active': course.id == selectedCourse.id}"
+      <li [ngClass]="{'active': course.id == selectedCourse._id}"
           *ngFor="let course of courses"
           class="list-group-item">
-        {{course.title}}
+        <p>
+          {{course.title}}
+        </p>
+        <div>
+          <button [routerLink]="['/courses/', course.id]">
+            View
+          </button>
+          <button [routerLink]="['/enrollments/']">
+            Enroll
+          </button>
+        </div>
       </li>
     </ul>
   </div>

@@ -22,10 +22,54 @@
     </ul>
     <h3>Widgets</h3>
     <ul class="list-group">
-      <li *ngFor="let widget of selectedLesson.widgets"
-          class="list-group-item">
-        {{widget}}
-      </li>
+      <div *ngFor="let widget of selectedLesson.widgets"
+           class="list-group-item">
+        {{widget.title}}
+        <li *ngIf="widget.widgetType == 'HEADING_WIDGET'"
+            class="list-group-item">
+          <h1 *ngIf="widget.size == 1">
+            {{widget.text}}
+          </h1>
+          <h2 *ngIf="widget.size == 2">
+            {{widget.text}}
+          </h2>
+          <h3 *ngIf="widget.size == 3">
+            {{widget.text}}
+          </h3>
+        </li>
+        <li *ngIf="widget.widgetType == 'PARAGRAPH_WIDGET'"
+            class="list-group-item">
+          <p>
+            {{widget.text}}
+          </p>
+        </li>
+        <li *ngIf="widget.widgetType == 'LIST_WIDGET'"
+            class="list-group-item">
+          <div *ngIf="widget.listType == 'ul'">
+            <ul *ngFor="let item of newLineSplit(widget.text)">
+              <li>
+                {{item}}
+              </li>
+            </ul>
+          </div>
+          <div *ngIf="widget.listType == 'ol'">
+            <ol *ngFor="let item of newLineSplit(widget.text)">
+              <li>
+                {{widget.listItems}}
+              </li>
+            </ol>
+          </div>
+        </li>
+        <li *ngIf="widget.widgetType == 'IMAGE_WIDGET'"
+            class="list-group-item">
+          <img src="{{widget.url}}"
+               height="300"
+               width="300"/>
+        </li>
+        <li *ngIf="widget.widgetType == 'LINK_WIDGET'">
+          Unsupported widget type.
+        </li>
+      </div>
     </ul>
   </div>
 </div>

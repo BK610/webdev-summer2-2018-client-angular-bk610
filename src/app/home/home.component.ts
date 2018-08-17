@@ -11,7 +11,9 @@ import {UserServiceClient} from '../services/user.service.client';
 
 export class HomeComponent implements OnInit {
   courses = [];
-  selectedCourse = {};
+  selectedCourse = {
+    _id: ''
+  };
   user = {};
   constructor(private router: Router,
               private courseService: CourseServiceClient,
@@ -21,6 +23,11 @@ export class HomeComponent implements OnInit {
   navigateToCourse(course) {
     this.selectedCourse = course;
     const url = '/courses/' + course.id;
+    this.router.navigate([url]);
+  }
+  navigateToEnrollment(course) {
+    this.selectedCourse = course
+    const url = '/sections/' + course.id;
     this.router.navigate([url]);
   }
 

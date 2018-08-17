@@ -9,8 +9,7 @@ import {UserServiceClient} from '../services/user.service.client';
   styleUrls: ['./course-navigator.component.css']
 })
 export class CourseNavigatorComponent implements OnInit {
-
-  user = {id: -1};
+  user = {};
   courseId = {};
   modules = [];
   selectedModule = {
@@ -34,10 +33,13 @@ export class CourseNavigatorComponent implements OnInit {
     this.selectedLesson = lesson;
   }
 
+  newLineSplit(text) {
+    return text.split('\n');
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       this.courseId = params['courseId'];
-      console.log(this.courseId);
     });
 
     this.courseService
@@ -45,7 +47,6 @@ export class CourseNavigatorComponent implements OnInit {
       .then(modules => this.modules = modules)
       .then(() => this.userService.currentUser()
         .then((user) => this.user = user));
-    console.log(this.modules);
   }
 
 }

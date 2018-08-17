@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CourseServiceClient} from '../services/course.service.client';
-import {SectionServiceClient} from "../services/section.service.client";
+import {SectionServiceClient} from '../services/section.service.client';
 
 @Component({
   selector: 'app-sections',
@@ -12,9 +12,12 @@ export class SectionsComponent implements OnInit {
   courses = []
   sections = []
   selectedCourse = {
-    id: -1
+    title: '',
+    _id: -1
   }
-  section = {}
+  section = {
+    title: ''
+  }
 
   constructor(private sectionService: SectionServiceClient,
               private courseService: CourseServiceClient) { }
@@ -22,17 +25,17 @@ export class SectionsComponent implements OnInit {
   selectCourse = course => {
     this.selectedCourse = course;
     this.sectionService
-      .findSectionsForCourse(course.id)
+      .findSectionsForCourse(course._id)
       .then(sections => this.sections = sections);
   }
 
   addSection = section => {
-    section.courseId = this.selectedCourse.id;
+    section.courseId = this.selectedCourse._id;
     this.sectionService
       .createSection(section)
       .then(() => {
         return this.sectionService
-          .findSectionsForCourse(this.selectedCourse.id);
+          .findSectionsForCourse(this.selectedCourse._id);
       })
       .then(sections => this.sections = sections);
   }
