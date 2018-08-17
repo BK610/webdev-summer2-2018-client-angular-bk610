@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {UserServiceClient} from "../services/user.service.client";
-import {current} from "codelyzer/util/syntaxKind";
+import {UserServiceClient} from '../services/user.service.client';
+import {current} from 'codelyzer/util/syntaxKind';
 
 @Component({
   selector: 'app-profile',
