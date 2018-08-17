@@ -3,6 +3,6 @@ const app = express();
 const path = require('path');
 app.use(express.static('./dist'));
 app.get('/*', function (req, res) {
-  res.sendFile(__dirname + '/dist/index.html');
+  res.sendFile(__dirname + '/dist/webdev-summer2-client-angular-bk610/index.html');
 });
 app.listen(process.env.PORT || 4200);
