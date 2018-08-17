@@ -4,7 +4,7 @@ import {Injectable} from '@angular/core';
 export class UserServiceClient {
   url = 'https://cs4550-bk610-node-server.herokuapp.com/api';
   login = (user) => {
-    fetch(this.url + '/login', {
+    return fetch(this.url + '/login', {
       method: 'post',
       credentials: 'include',
       headers: {
@@ -13,15 +13,15 @@ export class UserServiceClient {
       body: JSON.stringify(user)
     })
       .then(response => response.status);
-  }
+  };
 
   currentUser = () => {
-    fetch(this.url + '/user/current', {
+    return fetch(this.url + '/user/current', {
       credentials: 'include'
     }).then(response => response.json());
   }
   register = (user) => {
-    fetch(this.url + '/user/register', {
+    return fetch(this.url + '/register', {
       method: 'post',
       credentials: 'include',
       headers: {
@@ -29,6 +29,6 @@ export class UserServiceClient {
       },
       body: JSON.stringify(user)
     })
-      .then(response => response.json());
+      .then(response => response.status);
   }
 }
