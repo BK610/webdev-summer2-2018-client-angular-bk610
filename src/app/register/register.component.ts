@@ -41,14 +41,14 @@ export class RegisterComponent implements OnInit {
         // dateOfBirth: dateOfBirth,
         // role: role
       };
-      this.userService.register(user)
-        .then(status => {
-          if (status === 200) {
-            return this.router.navigate(['/profile']);
-          } else {
-            alert('Register failed. Username may already exist.');
-          }
-        });
+      this.userService.register(user);
+        // .then(status => {
+        //   if (status === 200) {
+        //     return this.router.navigate(['/profile']);
+        //   } else {
+        //     alert('Register failed. Username may already exist.');
+        //   }
+        // });
     } else {
       alert('Passwords must match.');
     }

@@ -30,6 +30,5 @@ export class UserServiceClient {
       body: JSON.stringify(user)
     })
       .then(response => response.json());
-    return response;
   }
 }

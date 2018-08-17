@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
       username: username,
       password: password
     };
-    this.userService.login(user)
-      .then(u => this.router.navigate(['profile']));
+    this.userService.login(user);
+      // .then(u => this.router.navigate(['profile']));
   }
 
   ngOnInit() {
