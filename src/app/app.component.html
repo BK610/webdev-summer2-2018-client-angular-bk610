@@ -5,12 +5,17 @@
   <a routerLink="home">Home</a> |
   <a routerLink="enrollments">Enrollments (delete)</a> |
   <a routerLink="sections">Sections (delete)</a> |
-  <a *ngIf="currentUser.username === 'null'"
-    routerLink="login">Login</a>
+  <span *ngIf="currentUser.username === 'null'">
+    <a routerLink="login">
+      Login
+    </a>
+    |
+  </span>
   <a *ngIf="currentUser.username !== 'null'"
      (click)="logout()"
-     routerLink="login">Logout</a> |
-  <a routerLink="register">Register</a> |
+     routerLink="login">Logout</a>
+  <a *ngIf="currentUser.username === 'null'"
+     routerLink="register">Register</a> |
   <a routerLink="profile">Profile</a>
 
   <router-outlet></router-outlet>

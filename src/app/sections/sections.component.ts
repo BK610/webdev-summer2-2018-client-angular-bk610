@@ -8,34 +8,44 @@ import {SectionServiceClient} from '../services/section.service.client';
   styleUrls: ['./sections.component.css']
 })
 export class SectionsComponent implements OnInit {
-
-  courses = []
-  sections = []
+  courses = [];
+  sections = [];
   selectedCourse = {
     title: '',
-    _id: -1
-  }
+    id: Number
+  };
   section = {
-    title: ''
-  }
+    name: '',
+    seats: 24
+  };
 
   constructor(private sectionService: SectionServiceClient,
               private courseService: CourseServiceClient) { }
 
   selectCourse = course => {
     this.selectedCourse = course;
-    this.sectionService
-      .findSectionsForCourse(course._id)
+    this.sectionService.findSectionsForCourse(course.id)
+      .then(sections => {this.sections = sections;
+      console.log(this.sections); });
+  }
+
+  addSection = (section) => {
+    section.courseId = this.selectedCourse.id;
+    console.log(section);
+
+    this.sectionService.createSection(section)
+      .then(() => {
+        return this.sectionService.findSectionsForCourse(this.selectedCourse.id);
+      })
       .then(sections => this.sections = sections);
   }
 
-  addSection = section => {
-    section.courseId = this.selectedCourse._id;
-    this.sectionService
-      .createSection(section)
+  deleteSection = (section) => {
+    console.log(section);
+
+    this.sectionService.deleteSection(section._id)
       .then(() => {
-        return this.sectionService
-          .findSectionsForCourse(this.selectedCourse._id);
+        return this.sectionService.findSectionsForCourse(this.selectedCourse.id);
       })
       .then(sections => this.sections = sections);
   }

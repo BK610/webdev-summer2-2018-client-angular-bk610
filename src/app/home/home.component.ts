@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate([url]);
   }
   navigateToEnrollment(course) {
-    this.selectedCourse = course
+    this.selectedCourse = course;
     const url = '/sections/' + course.id;
     this.router.navigate([url]);
   }

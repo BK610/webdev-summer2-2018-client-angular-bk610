@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class UserServiceClient {
-  // url = 'https://cs4550-bk610-node-server.herokuapp.com/api';
-  url = 'http://localhost:8080/api';
+  url = 'https://cs4550-bk610-node-server.herokuapp.com/api';
+  // url = 'http://localhost:8080/api';
   login = (user) => {
     return fetch(this.url + '/login', {
       method: 'post',
