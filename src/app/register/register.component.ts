@@ -11,37 +11,27 @@ export class RegisterComponent implements OnInit {
   username: '';
   password: '';
   password2: '';
-  // firstName: '';
-  // lastName: '';
-  // email: '';
-  // phone: '';
-  // dateOfBirth: '';
-  // role: '';
   constructor(private router: Router,
               private userService: UserServiceClient) {
   }
 
-  register = (username,
-              password,
-              password2,
-              // firstName,
-              // lastName,
-              // email,
-              // phone,
-              // dateOfBirth,
-              /*role*/) => {
-    if (password === password2) {
-      const user = {
-        username: username,
-        password: password,
-        // firstName: firstName,
-        // lastName: lastName,
-        // email: email,
-        // phone: phone,
-        // dateOfBirth: dateOfBirth,
-        // role: role
+  register = (user) => {
+    if (user.password === user.password2) {
+      const newUser = {
+        username: user.username,
+        password: user.password,
+        firstName: String,
+        lastName: String,
+        email: String,
+        phone: String,
+        role: 'student',
+        sections: []
       };
-      this.userService.register(user)
+      if (user.username === 'admin' && user.password === 'admin') {
+        newUser.role = 'admin';
+      }
+      console.log(newUser);
+      this.userService.register(newUser)
         .then(status => {
           if (status === 200) {
             return this.router.navigate(['/profile']);

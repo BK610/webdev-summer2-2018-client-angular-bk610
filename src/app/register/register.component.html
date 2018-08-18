@@ -26,7 +26,11 @@
            [(ngModel)]="password2">
   </div>
   <button class="btn btn-success"
-          (click)="register(username, password, password2)">
+          (click)="register( {
+          username: username,
+          password: password,
+          password2: password2
+          })">
     Register
   </button>
 </div>

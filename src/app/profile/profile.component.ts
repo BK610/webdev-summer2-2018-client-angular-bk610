@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserServiceClient} from '../services/user.service.client';
-import {current} from 'codelyzer/util/syntaxKind';
 
 @Component({
   selector: 'app-profile',
@@ -8,16 +7,51 @@ import {current} from 'codelyzer/util/syntaxKind';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  username: String;
+  password: String;
+  firstName: String;
+  lastName: String;
+  email: String;
+  phone: String;
+  role: String;
+  currentUser = {
+    username: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    email: String,
+    phone: String,
+    role: '',
+    sections: []
+  };
 
-  currentUser = {}
+  constructor(private userService: UserServiceClient) {
+  }
 
-  constructor(private userService: UserServiceClient) { }
+  update(username,
+         password,
+         firstName,
+         lastName,
+         email,
+         phone) {
+    const newUser = {
+      username: username,
+      password: password,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      phone: phone,
+    };
+    this.userService.updateUser(newUser)
+      .then(response => response.json());
+  }
 
   ngOnInit() {
     this.userService.currentUser()
-      .then(user =>
-        this.currentUser = user
+      .then(user => {
+          this.currentUser = user;
+          console.log(this.currentUser);
+        }
       );
   }
-
 }

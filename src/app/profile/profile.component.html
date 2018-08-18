@@ -1,10 +1,105 @@
-<!--<h2>Welcome {{currentUser.username}}</h2>-->
+<h2>Welcome {{currentUser.username}}</h2>
 
-<h3>Enrollments</h3>
-<ul class="list-group">
-  <li class="list-group-item">
-      <!--*ngFor="let section of currentUser.sections">-->
-    <!--{{section.title}} (seats: 23)-->
-    <button class="float-right">Drop</button>
-  </li>
-</ul>
+<div class="container-fluid">
+  <div class="row">
+    <div class='col-6'>
+      <h1>
+        Profile
+      </h1>
+      <div *ngIf="currentUser.role === 'admin'"
+           class="float-right">
+        <button class='btn btn-primary'
+                routerLink="/admin">
+          Admin Editor
+        </button>
+      </div>
+      <div class="form-group row">
+        <label for="username"
+               class="col-lg-2 col-form-label">
+          Username
+        </label>
+        <div class="col-lg-10"
+             id="username">
+          <input [(ngModel)]='username'
+                 type="text"
+                 class="form-control"
+                 value={{currentUser.username}}>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="firstName"
+               class="col-lg-2 col-form-label">
+          First Name
+        </label>
+        <div class="col-lg-10"
+             id="firstName">
+          <input [(ngModel)]='firstName'
+                 type="text"
+                 class="form-control"
+                 value={{currentUser.firstName}}>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="lastName"
+               class="col-lg-2 col-form-label">
+          Last Name
+        </label>
+        <div class="col-lg-10"
+             id="lastName">
+          <input [(ngModel)]='lastName'
+                 type="text"
+                 class="form-control"
+                 value={{currentUser.lastName}}>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="phone"
+               class="col-lg-2 col-form-label">
+          Phone
+        </label>
+        <div class="col-lg-10"
+             id="phone">
+          <input [(ngModel)]='phone'
+                 class="form-control"
+                 placeholder="phone"
+                 value={{currentUser.phone}}>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="email"
+               class="col-lg-2 col-form-label">
+          Email
+        </label>
+        <div class="col-lg-10"
+             id="email">
+          <input [(ngModel)]="email"
+                 type="text"
+                 placeholder="email"
+                 class="form-control"
+                 value={{currentUser.email}}>
+        </div>
+      </div>
+      <div>
+        <button type="button"
+                class="btn btn-success btn-block"
+                (click)="updateUser(currentUser._id, username, password, firstName, lastName, phone)">
+          Update
+        </button>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class='col-5'>
+        <h1 class="mb-3">Your Sections</h1>
+        <li *ngFor="let enrollment of enrollments" class="list-group-item">
+          <button class="float-right btn btn-danger "
+                  (click)="unenroll(this.currentUser._id, enrollment.section._id, enrollment.section.seats)">
+            Un-enroll
+          </button>
+          <b>Section:</b> {{enrollment.section.title}}<br/>
+          <b>Seats:</b> {{enrollment.section.seats}}
+
+        </li>
+      </div>
+    </div>
+  </div>
+</div>

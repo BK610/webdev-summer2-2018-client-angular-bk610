@@ -5,7 +5,11 @@
   <a routerLink="home">Home</a> |
   <a routerLink="enrollments">Enrollments (delete)</a> |
   <a routerLink="sections">Sections (delete)</a> |
-  <a routerLink="login">Login</a> |
+  <a *ngIf="currentUser.username === 'null'"
+    routerLink="login">Login</a>
+  <a *ngIf="currentUser.username !== 'null'"
+     (click)="logout()"
+     routerLink="login">Logout</a> |
   <a routerLink="register">Register</a> |
   <a routerLink="profile">Profile</a>
 
