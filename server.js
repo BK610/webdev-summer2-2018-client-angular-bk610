@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-app.use(express.static(__dirname + './dist/webdev-summer2-client-angular-bk610'));
+app.use(express.static('./dist/cs4550-bk610-angular-client'));
 
 // app.use(function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin',
@@ -16,6 +16,6 @@ app.use(express.static(__dirname + './dist/webdev-summer2-client-angular-bk610')
 // });
 
 app.get('/*', function (req, res) {
-  res.sendFile(path.join(__dirname + '/dist/webdev-summer2-client-angular-bk610/index.html'));
+  res.sendFile(path.join('/dist/cs4550-bk610-angular-client/index.html'));
 });
 app.listen(process.env.PORT || 4200);
