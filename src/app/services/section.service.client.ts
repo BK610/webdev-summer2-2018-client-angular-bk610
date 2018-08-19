@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class SectionServiceClient {
-  // section_url = 'https://cs4550-bk610-node-server.herokuapp.com/api';
-  section_url = 'http://localhost:8080/api';
+  section_url = 'https://cs4550-bk610-node-server.herokuapp.com/api';
+  // section_url = 'http://localhost:8080/api';
   enroll = (studentId, sectionId) => {
     console.log(studentId);
     console.log(sectionId);
