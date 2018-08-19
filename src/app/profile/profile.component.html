@@ -3,9 +3,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class='col-6'>
-      <h1>
+      <h3>
         Profile
-      </h1>
+      </h3>
       <div *ngIf="currentUser.role === 'admin'"
            class="float-right">
         <button class='btn btn-primary'
@@ -81,25 +81,22 @@
       </div>
       <div>
         <button type="button"
-                class="btn btn-success btn-block"
-                (click)="updateUser(currentUser._id, username, password, firstName, lastName, phone)">
+                class="btn btn-success"
+                (click)="updateUser(currentUser)">
           Update
         </button>
       </div>
     </div>
-    <div class="row justify-content-center">
-      <div class='col-5'>
-        <h1 class="mb-3">Your Sections</h1>
-        <li *ngFor="let enrollment of enrollments" class="list-group-item">
-          <button class="float-right btn btn-danger "
-                  (click)="unenroll(this.currentUser._id, enrollment.section._id, enrollment.section.seats)">
-            Un-enroll
-          </button>
-          <b>Section:</b> {{enrollment.section.title}}<br/>
-          <b>Seats:</b> {{enrollment.section.seats}}
+    <div class="col-6">
+      <h3>Your Sections</h3>
+      <li *ngFor="let enrollment of enrollments" class="list-group-item">
+        <button class="float-right btn btn-danger "
+                (click)="unenroll(enrollment.section._id, enrollment.section.seats)">
+          Un-enroll
+        </button>
+        {{enrollment.section.title}}, <b>{{enrollment.section.seats}}</b> seats remaining
 
-        </li>
-      </div>
+      </li>
     </div>
   </div>
 </div>

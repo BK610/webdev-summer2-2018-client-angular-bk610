@@ -21,7 +21,6 @@ export class LoginComponent implements OnInit {
       username: username,
       password: password
     };
-    console.log(user);
     this.userService.login(user)
       .then(status => {
         if (status === 200) {

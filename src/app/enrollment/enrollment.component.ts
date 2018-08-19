@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {SectionServiceClient} from "../services/section.service.client";
+import {Component, OnInit} from '@angular/core';
+import {SectionServiceClient} from '../services/section.service.client';
 
 @Component({
   selector: 'app-enrollment',
@@ -8,14 +8,16 @@ import {SectionServiceClient} from "../services/section.service.client";
 })
 export class EnrollmentComponent implements OnInit {
 
-  sections = []
+  sections = [];
 
-  constructor(private sectionService: SectionServiceClient) { }
+  constructor(private sectionService: SectionServiceClient) {
+  }
 
-  enroll = sectionId =>
+  enroll = sectionId => {
     this.sectionService
-      .enroll(sectionId)
-  
+      .enroll(studentId, sectionId);
+  };
+
   ngOnInit() {
     this.sectionService
       .findAllSections()

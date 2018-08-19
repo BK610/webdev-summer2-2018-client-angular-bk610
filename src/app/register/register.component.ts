@@ -30,7 +30,6 @@ export class RegisterComponent implements OnInit {
       if (user.username === 'admin' && user.password === 'admin') {
         newUser.role = 'admin';
       }
-      console.log(newUser);
       this.userService.register(newUser)
         .then(status => {
           if (status === 200) {

@@ -1,49 +1,56 @@
-<h2>Sections</h2>
+  <h2>Sections</h2>
 
-<div class="row">
-  <div class="col-6">
-    <ul class="list-group">
-      <li class="list-group-item active">
-        Courses
-      </li>
-      <li (click)="selectCourse(course)"
-          *ngFor="let course of courses"
-          [ngClass]="{'active': course.id === selectedCourse.id}"
-          class="list-group-item">
-        {{course.title}} - ({{course.id}})
-      </li>
-    </ul>
-  </div>
-  <div class="col-6">
-    <ul class="list-group">
-      <li class="list-group-item active">
-        Sections
-        <button (click)="addSection(section)"
-                class="btn btn-success btn-sm float-right">Add
-        </button>
-      </li>
-      <li class="list-group-item">
-        <div class="row">
-          <div class="col">
-            <input [(ngModel)]="section.name"
-                   placeholder="name"
-                   class="form-control">
+  <div class="row">
+    <div class="col-6">
+      <ul class="list-group">
+        <li class="list-group-item active">
+          Courses
+        </li>
+        <li (click)="selectCourse(course)"
+            *ngFor="let course of courses"
+            [ngClass]="{'active': course.id === selectedCourse.id}"
+            class="list-group-item">
+          {{course.title}} - ({{course.id}})
+        </li>
+      </ul>
+    </div>
+    <div class="col-6">
+      <ul class="list-group">
+        <li class="list-group-item active">
+          Sections
+          <button *ngIf="currentUser.role === 'admin'"
+                  (click)="addSection(section)"
+                  class="btn btn-success btn-sm float-right">Add
+          </button>
+        </li>
+        <li class="list-group-item"
+            *ngIf="currentUser.role === 'admin'">
+          <div class="row">
+            <div class="col">
+              <input [(ngModel)]="section.name"
+                     placeholder="name"
+                     class="form-control">
+            </div>
+            <div class="col">
+              <input [(ngModel)]="section.seats"
+                     placeholder="seats"
+                     class="form-control">
+            </div>
           </div>
-          <div class="col">
-            <input [(ngModel)]="section.seats"
-                   placeholder="seats"
-                   class="form-control">
-          </div>
-        </div>
-      </li>
+        </li>
 
-      <li *ngFor="let section of sections" class="list-group-item">
-        {{section.name}}: <b>{{section.seats}}</b> seats remaining
-        <button (click)="deleteSection(section)"
-                class="btn btn-danger float-right">
-          Delete
-        </button>
-      </li>
-    </ul>
+        <li *ngFor="let section of sections" class="list-group-item">
+          {{section.name}}: <b>{{section.seats}}</b> seats remaining
+          <button (click)="enroll(section._id)"
+                  class="btn btn-secondary float-right">
+            Enroll
+          </button>
+          <button *ngIf="currentUser.role === 'admin'"
+                  (click)="deleteSection(section)"
+                  class="btn btn-danger float-right">
+            Delete
+          </button>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>

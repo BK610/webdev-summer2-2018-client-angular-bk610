@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CourseServiceClient} from '../services/course.service.client';
 import {SectionServiceClient} from '../services/section.service.client';
+import {UserServiceClient} from '../services/user.service.client';
 
 @Component({
   selector: 'app-sections',
@@ -15,23 +16,27 @@ export class SectionsComponent implements OnInit {
     id: Number
   };
   section = {
+    _id: '',
     name: '',
     seats: 24
   };
+  currentUser = {
+    _id: 0,
+    role: ''
+  }
 
   constructor(private sectionService: SectionServiceClient,
-              private courseService: CourseServiceClient) { }
+              private courseService: CourseServiceClient,
+              private userService: UserServiceClient) { }
 
   selectCourse = course => {
     this.selectedCourse = course;
     this.sectionService.findSectionsForCourse(course.id)
-      .then(sections => {this.sections = sections;
-      console.log(this.sections); });
+      .then(sections => this.sections = sections);
   }
 
   addSection = (section) => {
     section.courseId = this.selectedCourse.id;
-    console.log(section);
 
     this.sectionService.createSection(section)
       .then(() => {
@@ -41,8 +46,6 @@ export class SectionsComponent implements OnInit {
   }
 
   deleteSection = (section) => {
-    console.log(section);
-
     this.sectionService.deleteSection(section._id)
       .then(() => {
         return this.sectionService.findSectionsForCourse(this.selectedCourse.id);
@@ -50,9 +53,20 @@ export class SectionsComponent implements OnInit {
       .then(sections => this.sections = sections);
   }
 
+  enroll = (sectionId) => {
+    console.log(this.currentUser);
+    console.log(sectionId);
+    this.sectionService.enroll(this.currentUser._id, sectionId)
+      .then(response => response.json());
+}
+
   ngOnInit() {
     this.courseService.findAllCourses()
-      .then(courses => this.courses = courses);
+      .then(courses => {
+        this.courses = courses;
+        this.userService.currentUser()
+          .then(user => this.currentUser = user);
+      });
   }
 
 }

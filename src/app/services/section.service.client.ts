@@ -2,24 +2,27 @@ import {Injectable} from '@angular/core';
 
 @Injectable()
 export class SectionServiceClient {
-  section_url = 'https://cs4550-bk610-node-server.herokuapp.com/api';
-  // course_url = 'https://cs4550-summer2-2018-bk610.herokuapp.com/api';
-  // url = 'http://localhost:8080/api';
-  enroll = sectionId =>
-    fetch(this.section_url + '/section/' + sectionId + '/enroll', {
-      method: 'put',
+  // section_url = 'https://cs4550-bk610-node-server.herokuapp.com/api';
+  section_url = 'http://localhost:8080/api';
+  enroll = (studentId, sectionId) => {
+    console.log(studentId);
+    console.log(sectionId);
+    return fetch(this.section_url + '/student/' + studentId + '/section/' + sectionId, {
+      method: 'post',
+      credentials: 'include',
       headers: {
         'content-type': 'application/json'
-      },
-      credentials: 'include'
-    });
+      }
+    })
+      .then(response => response.json());
+  };
 
   findAllSections = () =>
     fetch(this.section_url + '/section', {
+      credentials: 'include',
       headers: {
         'content-type': 'application/json'
-      },
-      credentials: 'include'
+      }
     })
       .then(response => response.json());
 
@@ -44,7 +47,6 @@ export class SectionServiceClient {
       .then(response => response.json());
 
   deleteSection = (sectionId) => {
-    console.log(sectionId);
     return fetch(this.section_url + '/section/' + sectionId, {
       method: 'delete',
       headers: {
@@ -55,8 +57,8 @@ export class SectionServiceClient {
       .then(response => response.json());
   };
 
-  findSectionsForStudent() {
-    return fetch(this.section_url + '/student/section', {
+  findSectionsForStudent(studentId) {
+    return fetch(this.section_url + '/student/' + studentId + '/section', {
       headers: {
         'content-type': 'application/json'
       },
