@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CourseServiceClient} from '../services/course.service.client';
 import {SectionServiceClient} from '../services/section.service.client';
 import {UserServiceClient} from '../services/user.service.client';
@@ -23,17 +23,18 @@ export class SectionsComponent implements OnInit {
   currentUser = {
     _id: 0,
     role: ''
-  }
+  };
 
   constructor(private sectionService: SectionServiceClient,
               private courseService: CourseServiceClient,
-              private userService: UserServiceClient) { }
+              private userService: UserServiceClient) {
+  }
 
   selectCourse = course => {
     this.selectedCourse = course;
     this.sectionService.findSectionsForCourse(course.id)
       .then(sections => this.sections = sections);
-  }
+  };
 
   addSection = (section) => {
     section.courseId = this.selectedCourse.id;
@@ -43,7 +44,7 @@ export class SectionsComponent implements OnInit {
         return this.sectionService.findSectionsForCourse(this.selectedCourse.id);
       })
       .then(sections => this.sections = sections);
-  }
+  };
 
   deleteSection = (section) => {
     this.sectionService.deleteSection(section._id)
@@ -51,14 +52,14 @@ export class SectionsComponent implements OnInit {
         return this.sectionService.findSectionsForCourse(this.selectedCourse.id);
       })
       .then(sections => this.sections = sections);
-  }
+  };
 
   enroll = (sectionId) => {
     console.log(this.currentUser);
     console.log(sectionId);
     this.sectionService.enroll(this.currentUser._id, sectionId)
       .then(response => response.json());
-}
+  };
 
   ngOnInit() {
     this.courseService.findAllCourses()
